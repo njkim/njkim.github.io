@@ -1,12 +1,9 @@
 <html>
 <head>
-	<title>A Leaflet map!</title>
+	<title>54A Final Project</title>
 	<link rel="stylesheet" href="scripts/leaflet.css" />
-	<link rel="stylesheet" href="scripts/MarkerCluster.css"/>
 	<script src="scripts/leaflet.js"></script>
 	<script src="scripts/jquery-3.1.1.min.js"></script>
-	<script src="scripts/leaflet.ajax.min.js"></script>
-	<script src="scripts/leaflet.markercluster.js"></script>
 	
 	<style>
 		#map{ height: 100% }
@@ -16,6 +13,20 @@
 	<div id="map"></div>
 
 	<script>
+	
+	var ranch99_geojson =
+	{
+	"type": "FeatureCollection",
+	"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
+																					
+	"features": [
+	{ "type": "Feature", "properties": { "Name": "Cupertino", "Address": "10983 North Wolfe Road", "City": "Cupertino", "field_4": " CA 95014", "latitude": 37.336643, "longitude": -122.015511 }, "geometry": { "type": "Point", "coordinates": [ -122.01551060000001, 37.3366432 ] } },
+	{ "type": "Feature", "properties": { "Name": "Cupertino De Anza", "Address": "10425 S De Anza Blvd", "City": "Cupertino", "field_4": " CA 95014", "latitude": 37.317471, "longitude": -122.032524 }, "geometry": { "type": "Point", "coordinates": [ -122.0325241, 37.3174706 ] } },
+	{ "type": "Feature", "properties": { "Name": "Milpitas", "Address": "338 Barber Lane.", "City": "Milpitas", "field_4": " CA 95035", "latitude": 37.421960, "longitude": -121.918013 }, "geometry": { "type": "Point", "coordinates": [ -121.918013, 37.4219596 ] } },
+	{ "type": "Feature", "properties": { "Name": "Mountain View", "Address": "1350 Grant Road.", "City": "Mountain View", "field_4": " CA 94040", "latitude": 37.378269, "longitude": -122.076218 }, "geometry": { "type": "Point", "coordinates": [ -122.0762177, 37.3782692 ] } },
+	{ "type": "Feature", "properties": { "Name": "San Jose", "Address": "1688 Hostetter Road.", "City": "San Jose", "field_4": " CA 95131", "latitude": 37.387701, "longitude": -121.884020 }, "geometry": { "type": "Point", "coordinates": [ -121.88402, 37.387701 ] } }
+	]};
+
 	
 	var final_geojson = 
 	{
@@ -398,9 +409,7 @@
 	]
 	}
 
-	
-	// initialize the map
-	var map = L.map('map').setView([37.30, -121.85], 10);
+	var map = L.map('map').setView([37.20, -121.75], 10);
 
 	var CartoDB_Positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -419,27 +428,32 @@
 		attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 		subdomains: 'abcd',
 		maxZoom: 17,
-		minZoom: 1,
+		minZoom: 6,
 		ext: 'png'
 	});
 
 	var OpenMapSurfer_Grayscale = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
 		maxZoom: 17,
-		minZoom: 9,
+		minZoom: 6,
 		attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	});	
+	});
 	
-	
-	Stamen_TonerLite.addTo(map);
+	var Esri_WorldGrayCanvas = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+		maxZoom: 17,
+		minZoom: 6
+	});
+
+	Esri_WorldGrayCanvas.addTo(map);
 	
 	var	style1 = function(feature){
 		var fillColor,
 			korean = feature.properties.korean;
-		if (korean > 513) fillColor = "#006837";
-		else if (korean > 385) fillColor = "#31a354";
-		else if (korean > 256) fillColor = "#78c679";
-		else if (korean > 128) fillColor = "#c2e699";
-		else if (korean > 0) fillColor = "#ffffcc";
+		if (korean > 513) fillColor = "#993404";
+		else if (korean > 385) fillColor = "#d95f0e";
+		else if (korean > 256) fillColor = "#fe9929";
+		else if (korean > 128) fillColor = "#fed98e";
+		else if (korean > 0) fillColor = "#ffffd4";
 		else fillColor = "#f7f7f7";
 		return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .7 };
 	};
@@ -451,10 +465,10 @@
 	var style2 = function(feature){
 		var fillColor,
 			pop = feature.properties.neighbor;
-		if (pop > 3000) fillColor = "#006837";
-		else if (pop > 2000) fillColor = "#31a354";
-		else if (pop > 1500) fillColor = "#78c679";
-		else if (pop > 1000) fillColor = "#c2e699";
+		if (pop > 2519) fillColor = "#006837";
+		else if (pop > 1890) fillColor = "#31a354";
+		else if (pop > 1262) fillColor = "#78c679";
+		else if (pop > 633) fillColor = "#c2e699";
 		else if (pop > 0) fillColor = "#ffffcc";
 		else fillColor = "#f7f7f7";
 		return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .7 };
@@ -463,8 +477,18 @@
 	var onEachFeature2 = function(feature, layer){
 		layer.bindPopup( "<strong>" + feature.properties.name + "</strong><br/>" + feature.properties.neighbor + " Korean" );
 	};
-		
 	
+	var ranchLogo = L.icon({
+		iconUrl: 'ranch99.png',
+		iconSize: [30,30]
+	});
+	
+	var pointToLayer = function(feature,latlng){
+		var marker = L.marker(latlng,{icon: ranchLogo});
+		marker.bindPopup(feature.properties.Name + '<br/>' + feature.properties.Address);
+		return marker;
+	};
+		
 	var korean = L.geoJson(final_geojson, {
 								style: style1,
 								onEachFeature: onEachFeature1
@@ -475,10 +499,14 @@
 								onEachFeature: onEachFeature2
 							});
 
+	var ranch99 = L.geoJson(ranch99_geojson, {
+							pointToLayer: pointToLayer
+							});
+							
 	L.control.layers({
 		'Korean': korean,
 		'Neighbor': neighbor
-	}).addTo(map);
+	},{'Ranch 99': ranch99}).addTo(map);
 				
 	</script>
 </body>

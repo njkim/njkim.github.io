@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="scripts/reveal.css">
+        <link rel="stylesheet" href="scripts/black.css">
+		<link rel="stylesheet" href="scripts/zenburn.css">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+				<section>
+					<p>GIST 54A Final Project</p><br>
+					<h3>A Site Recommendation for New Korean Grocery Store</h3><br><br>
+					<p>Namjun Kim</p>
+				</section>
+
+				<section>
+					<h3>Census Data</h3>
+					<p>Using Census Data for GIS Analysis</p>
+					<p>Example</p>
+				</section>
+
+				<section>
+					<h3>Ethinicity</h3>
+					<p>Using Ethnicity Data for GIS Analysis</p>
+					<p>Example</p>
+				</section>
+
+				<section>
+					<h3>Open Source Softwares</h3>
+					<p>QGIS</p>
+					<p>PostgreSQL / PostGIS</p>
+					<p>Javascript / Leaflet</p>
+				</section>
+
+				<section>
+					<h3>Flow Chart</h3>
+					<p>for the spatial analysis</p>
+				</section>
+
+				<section>
+					<h3>QGIS Map</h3>
+					<p>for the spatial analysis</p>
+				</section>
+
+				<section>
+					<h2>SQL query</h2>
+					<pre><code class="hljs">
+CREATE TABLE final AS
+with b02006_tract as (
+	select b.geoid, b.geoid2, t.name, b.geodisplaylabel
+	       as label, b.hd01_vd10 as Korean, t.geom
+	from b02006 b join tl_2014_06_tract t
+	on b.geoid2 = t.geoid::bigint)
+select A.name, A.label, A.Korean, sum(B.Korean) as neighbor, A.geom
+from b02006_tract A join b02006_tract B
+on ST_intersects(A.geom, B.geom)
+where A.label ilike '%Santa Clara%'
+group by A.name, A.label, A.Korean, A.geom
+order by A.name;
+					</code></pre>
+				</section>
+
+				<section>
+					<p>The distribution of Korean people</p>
+					<iframe src="gist54map.html" height="80%" width="80%"></iframe>
+				</section>
+
+  			</div>
+      </div>
+      <script src="scripts/reveal.js"></script>
+      <script>
+          Reveal.initialize();
+      </script>
+    </body>
+</html>
