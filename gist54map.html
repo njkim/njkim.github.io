@@ -478,7 +478,7 @@
 		layer.bindPopup( "<strong>" + feature.properties.name + "</strong><br/>" + feature.properties.neighbor + " Korean" );
 	};
 	
-	var ranchLogo = L.icon({
+/*	var ranchLogo = L.icon({
 		iconUrl: 'ranch99.png',
 		iconSize: [30,30]
 	});
@@ -488,7 +488,14 @@
 		marker.bindPopup(feature.properties.Name + '<br/>' + feature.properties.Address);
 		return marker;
 	};
-		
+*/		
+
+	var pointToLayer = function(feature,latlng){
+		var marker = L.marker(latlng);
+		marker.bindPopup(feature.properties.Name + '<br/>' + feature.properties.Address);
+		return marker;
+	};
+	
 	var korean = L.geoJson(final_geojson, {
 								style: style1,
 								onEachFeature: onEachFeature1

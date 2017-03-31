@@ -1,72 +1,176 @@
 <html>
     <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>A Location Recommendation</title>
         <link rel="stylesheet" href="scripts/reveal.css">
         <link rel="stylesheet" href="scripts/black.css">
-		<link rel="stylesheet" href="scripts/zenburn.css">
     </head>
     <body>
         <div class="reveal">
             <div class="slides">
 
 				<section>
-					<p>GIST 54A Final Project</p><br>
-					<h3>A Site Recommendation for New Korean Grocery Store</h3><br><br>
-					<p>Namjun Kim</p>
+					<h3>A Site Recommendation for New Korean Grocery Store</h3><br/>
+					<p>Spatial Analysis<br/>
+					U.S. Census<br/>
+					Spatial Database</p><br/>
+					<p>Foothill College<br/>
+					Namjun Kim</p>
 				</section>
 
 				<section>
-					<h3>Census Data</h3>
-					<p>Using Census Data for GIS Analysis</p>
-					<p>Example</p>
+					<h3>Purpose of the Project</h3><br/>
+					<p>Specific aim<br/>
+					- To recommend the site for a new Korean grocery store</p>
+					<p>Broad aims<br/>
+					- To learn about Census data for GIS analysis<br/>
+					- To learn about a spatial database</p>
 				</section>
 
 				<section>
-					<h3>Ethinicity</h3>
-					<p>Using Ethnicity Data for GIS Analysis</p>
-					<p>Example</p>
+					<h3>Find the census tracts in Santa Clara County</h3><br/>
+						<p>1. that have high Asian and Korean populations<br/>
+						- data from U.S. Census (B02001, B02006)</p>
+						<p>2. that intersect with major highways<br/>
+						  - data from California Department of Transportation</p>
+						<p>3. that does not have existing Asian grocery stores<br/>
+						  - geocoding the addresses from store websites</p>
+				</section>
+				
+				<section>
+					<h3>Spatial Database</h3><br/>
+					<p>- Including Korean populations of neighboring tracts sounds like a good idea<br/>
+					- But, 372 tracts in ArcGIS? Really?</p>
+					<p>- Spatial Database!</p>
+					<p>- PostGIS is a spatial database extender for open source database PostgreSQL (also open source)</p>
 				</section>
 
 				<section>
-					<h3>Open Source Softwares</h3>
-					<p>QGIS</p>
-					<p>PostgreSQL / PostGIS</p>
-					<p>Javascript / Leaflet</p>
+					<h3>Spatial Analysis</h3>
+					<img height = "480" src="gist54/SCC1.png">
 				</section>
 
 				<section>
-					<h3>Flow Chart</h3>
-					<p>for the spatial analysis</p>
+					<h3>Spatial Analysis</h3>
+					<img height = "480" src="gist54/SCC2.png">
 				</section>
 
 				<section>
-					<h3>QGIS Map</h3>
-					<p>for the spatial analysis</p>
+					<h3>Spatial Analysis</h3>
+					<img height = "480" src="gist54/SCC3.png">
 				</section>
 
 				<section>
-					<h2>SQL query</h2>
-					<pre><code class="hljs">
-CREATE TABLE final AS
-with b02006_tract as (
-	select b.geoid, b.geoid2, t.name, b.geodisplaylabel
-	       as label, b.hd01_vd10 as Korean, t.geom
-	from b02006 b join tl_2014_06_tract t
-	on b.geoid2 = t.geoid::bigint)
-select A.name, A.label, A.Korean, sum(B.Korean) as neighbor, A.geom
-from b02006_tract A join b02006_tract B
-on ST_intersects(A.geom, B.geom)
-where A.label ilike '%Santa Clara%'
-group by A.name, A.label, A.Korean, A.geom
-order by A.name;
-					</code></pre>
+					<h3>Spatial Analysis</h3>
+					<img height = "480" src="gist54/SCC4.png">
 				</section>
 
 				<section>
-					<p>The distribution of Korean people</p>
+					<h3>Spatial Analysis</h3>
+					<img height = "480" src="gist54/SCC5.png">
+				</section>
+
+				<section>
+					<p>Webmap with leaflet.js</p>
 					<iframe src="gist54map.html" height="80%" width="80%"></iframe>
 				</section>
 
-  			</div>
+				<section>
+					<h3>Result of Spatial Analysis</h3>
+					<img height = "480" src="gist54/detail2.png">
+				</section>
+
+				<section>
+					<h3>PostgreSQL/PostGIS</h3>
+					<p>Census tables and shapefiles are imported</p>
+					<img src="gist54/schema.png">
+				</section>
+
+				<section>
+					<h3>PostgreSQL/PostGIS</h3>
+					<p>Query to create a table</p>
+					<img src="gist54/query1.png">
+				</section>
+
+				<section>
+					<h3>PostgreSQL/PostGIS</h3>
+					<p>The table with necessary info</p>
+					<img src="gist54/table1.png">
+				</section>
+
+				<section>
+					<h3>PostgreSQL/PostGIS</h3>
+					<p>geometry column (geom)</p>
+					<img src="gist54/table2.png">
+				</section>
+
+				<section>
+					<h3>PostgreSQL/PostGIS</h3>
+					<p>The same analysis as the previous ArcGIS</p>
+					<img src="gist54/final1.png">
+				</section>
+
+				<section>
+					<h3>PostgreSQL/PostGIS</h3>
+					<p>Considering neighboring tracts</p>
+					<img src="gist54/final2.png">
+				</section>
+
+				<section>
+					<h3>The Fianl Result</h3>
+					<img height = "480" src="gist54/detail3.png">
+				</section>
+
+				<section>
+					<h3>Grocery Stores</h3><br/>
+					<p>- Provide fresh food</p>
+					<p>- Employment opportunity</p>
+					<p>- Center for community and neighborhood</p>
+				</section>
+
+				<section>
+					<h3>Grocery Stores</h3><br/>
+					<p>“We are what we eat”</p><br/>
+					<p>- Grocery Gap & Underserved community<br/>
+					- Many groups of researchers try to make connections between underserved area and socioeconomic status<br/>
+					- Census data are critical to the research</p>
+				</section>
+				
+				<section>
+					<h3>U.S. Census</h3><br/>
+					<p>“The U.S. Census counts every resident in the United States and takes place every 10 years.”</p><br/>
+					<p>- The number of seats in the house of representatives<br/>
+					- Distribution of federal funding</p>
+				</section>
+
+				<section>
+					<h3>U.S. Census form 2010</h3>
+					<img height = "480" src="gist54/census.png">
+				</section>
+
+				<section>
+					<h3>American Community Survey (ACS)</h3><br/>
+					<p>- Replaced the long form<br/>
+					- 3.5 million addresses each year</p><br/>
+					<p>- 1 year estimates: 65,000+<br/>
+					- 3 year estimates: 20,000+<br/>
+					- 5 year estimates: all</p>
+				</section>
+
+				<section>
+					<h3>U.S. Census Geographical Units</h3>
+					<img height = "480" src="gist54/censusgeog.png">
+				</section>
+
+				<section>
+					<h3>Conclusions</h3><br/>
+					<p>- Spatial Analysis on recommendation of the census tracts for a new Korean grocery store<br/><br/>
+					- A spatial database system PostgreSQL/PostGIS was introduced<br/><br/>
+					- U.S. Census – must know</p>
+
+				</section>
+				
+			</div>
       </div>
       <script src="scripts/reveal.js"></script>
       <script>
