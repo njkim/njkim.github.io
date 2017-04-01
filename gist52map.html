@@ -211,12 +211,12 @@
 	
 	var onEachFeature = function(feature, layer){
 		layer.bindPopup( "<strong>" + feature.properties.name + "</strong>");
-		layer.on('mouseover', function (e) {
+/*		layer.on('mouseover', function (e) {
             this.openPopup();
         });
         layer.on('mouseout', function (e) {
             this.closePopup();
-        });
+        }); */
 	};
 	
 	var pointToLayer = function(feature,latlng){
@@ -263,7 +263,7 @@
 		'OpenMap Surfer Grayscale': OpenMapSurfer_Grayscale,
 		'Esri World Imagery': Esri_WorldImagery, 
 		'Stamen Watercolor': Stamen_Watercolor
-	},{'building': building, 'land': land, 'road': road, 'point of interest': poi}).addTo(map);
+	},{'Building': building, 'Land': land, 'Road': road, 'Point of Interest': poi}, {collapsed: false}).addTo(map);
 				
 	</script>
 </body>
