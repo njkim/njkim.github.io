@@ -1,13 +1,100 @@
+<!DOCTYPE html>
 <html>
-    <head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Welcome!</title>
-    </head>
-    <body>
-		<h1>Welcome to my Home!</h1>
-		<p>Here are some sampels of my GIS works</p>
-		<h3><a href="gist52s.html">Mapping Foothill College Main Campus</a></h3>
-		<h3><a href="gist54s.html">Korean Grocery Store Location Recommendation</a></h3>
-		<h3><a href="other.html">Other Projects and Maps</a></h3>
-    </body>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>On the Road</title>
+
+    <link href="stylesheet/bootstrap.css" rel="stylesheet">
+    <link href="stylesheet/styles.css" rel="stylesheet">
+	
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+  
+		<!-- start collapsed navbar-->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_navbar" aria-expanded="false">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div><!-- / collapsed navbar-->
+
+      <!-- start un-collapsed navbar-->
+      <div class="collapse navbar-collapse" id="main_navbar">
+        <ul class="nav navbar-nav">
+			<li class="active"><a href="index.html">
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span> 
+			Home</a></li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 role="button" aria-haspopup="true" aria-expanded="false">
+                 Mapping Camous <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="gist52s.html">summary</a></li>
+					<li><a href="gist52map.html">map</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 role="button" aria-haspopup="true" aria-expanded="false">
+                 Location Recommendation <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="gist54s.html">summary</a></li>
+					<li><a href="gist54map.html">map</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 role="button" aria-haspopup="true" aria-expanded="false">
+                 Other Projects and Maps <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="other.html">slideshow</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 role="button" aria-haspopup="true" aria-expanded="false">
+                 about me  <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="lab1.html">about me</a></li>
+					<li><a href="map1-1.html">resume</a></li>
+				</ul>
+			</li>
+		</ul>
+      </div><!-- / un-collapsed navbar-->
+  </nav>
+
+	<header class="jumbotron">
+		<h1 class="center">On the Road</h1>
+		<img src="images/welcome.png" alt="welcome image" id="welcome_banner" />
+	</header> <!-- end of jumbotron -->
+		
+    <div class="container">
+
+		<!-- start breadcrumb -->
+		<ol class="breadcrumb larger-font">
+			<li><a href="index.html">Home</a></li>
+		</ol>
+		<!-- / breadcrumb -->
+
+		<div id="welcome">
+			<h1>Welcome to my Home!</h1>
+			<h3>Here are some sampels of my GIS works</h3>
+			<h3><a href="gist52s.html">Mapping Foothill College Main Campus</a></h3>
+			<h3><a href="gist54s.html">Korean Grocery Store Location Recommendation</a></h3>
+			<h3><a href="other.html">Other Projects and Maps</a></h3>
+		</div><!-- end of welcome -->
+	  
+    </div> <!-- end .container-->
+
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+
+</body>
 </html>

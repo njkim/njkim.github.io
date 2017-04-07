@@ -1,0 +1,78 @@
+.jumbotron {
+    padding:70px 30px 50px 30px;
+    margin:0px auto;
+/*	background: #3c903c; */
+    background: #7986CB; /*#violet theme */
+    color:floralwhite;
+}
+
+.row-content {
+    margin:0px auto;
+    padding: 50px 0px 50px 0px;
+    border-bottom: 1px ridge;
+    min-height:100px;
+}
+
+.banner {
+	margin: auto;
+    width: 100%;
+    padding: 10px;	
+}
+
+#welcome_banner {
+	margin: auto;
+    width: 100%;
+}
+
+.center {
+	text-align:center;
+}
+
+.larger-font{
+  font-size: 100%;
+}
+
+.affix {
+    top:100px;
+}
+
+.navbar-inverse {
+/*    background-color: #2d6c2d; */
+    background-color: #303F9F; /*#violet theme*/
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #fff;
+/*    background: #1e481e; */
+    background: #1A237E; /*#violet theme*/
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+/*    background: #1e481e; */
+    background: #1A237E; /*#violet theme*/
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu> li> a,
+.navbar-inverse .navbar-nav .open .dropdown-menu {
+/*    background-color: #2d6c2d; */
+    background-color: #303F9F; /*#violet theme*/
+    color:#eeeeee;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu> li> a:hover {
+    color:#000000;
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 20px;
+    min-height:200px;
+
+}
