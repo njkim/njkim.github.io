@@ -1,6 +1,6 @@
 <html>
-	<meta charset="UTF-8"> 
 <head>
+	<meta charset="UTF-8">
 	<title>Grave-project</title>
 	<link rel="stylesheet" href="scripts/leaflet.css" />
 	<script src="scripts/leaflet.js"></script>
@@ -44,7 +44,7 @@
 			{"grave_id":20,"person":"Almetria Vaba"}
 			];
 
-/*		var relationship_json = [
+		var relationship_json = [
 			{"person1":"Adam Lodge","person2":"Almetria Vaba","relationship":"Spouse"},
 			{"person1":"Adam Lodge","person2":"Kai Lodge","relationship":"Parent"},
 			{"person1":"Almetria Vaba","person2":"Kai Lodge","relationship":"Parent"},
@@ -122,7 +122,7 @@
 			{"person1":"Rosemary Otto","person2":"Dorothy Lodge","relationship":"Child"},
 			{"person1":"Sebastian Arteaga","person2":"Julann Lodge","relationship":"Child"}
 			];
-*/
+
 		var grave_geojson = {
 			"type": "FeatureCollection",
 			"name": "grave",
@@ -148,7 +148,7 @@
 			{ "type": "Feature", "properties": { "grave_id": 20, "lat": 37.6688, "lon": -122.081 }, "geometry": { "type": "Point", "coordinates": [ -122.0808, 37.6688 ] } }
 			]};
 
-		var map = L.map('map').setView([39, -100], 5);
+		var map = L.map('map').setView([20, -35], 3);
 
 		var Stamen_Watercolor = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
 			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Icon made by Freepik from www.flaticon.com',
@@ -176,13 +176,22 @@
 		    iconUrl: "scripts/images/rip.svg",
 		    iconSize:     [38, 95]
 		});
-		
+
 		var getInterred = function(input_id) {
-			console.log('input_id is' + input_id)
 			var return_string = '';
 			for (var i = 0; i < interred_json.length; i++) {
 				if (interred_json[i].grave_id == input_id) {
-					return_string = return_string + interred_json[i].person + '</br>';
+					return_string = return_string + "<a href=\"#\" onclick=\"alert('" + getRelated(interred_json[i].person) + "');\">" + interred_json[i].person + "</a></br>";
+				};
+			};
+			return return_string;
+		};
+		
+		var getRelated = function(person) {
+			var return_string = '';
+			for (var i = 0; i < relationship_json.length; i++) {
+				if (relationship_json[i].person1 == person) {
+					return_string = return_string + relationship_json[i].relationship + ' of ' + relationship_json[i].person2 + '  ';
 				};
 			};
 			return return_string;
@@ -204,7 +213,7 @@
 			'OpenMap Surfer Grayscale': OpenMapSurfer_Grayscale,
 			'Esri World Imagery': Esri_WorldImagery
 		},{},{position: 'topright', collapsed: false}).addTo(map);
-		
+
 	</script>
 </body>
 </html>
